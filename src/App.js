@@ -1,24 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Navbar from "./Components/Navbar";
+import { Switch, Route } from "react-router-dom";
+import ZinqCaculator from "./Zinqcaculator/ZinqCaculator";
+import Insurance from "./Insurance/Insurance";
+import CashBack from "./Cashback/Cashback";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <Switch>
+        <Route path="/caculator" component={ZinqCaculator} />
+        <Route path="/insurance" component={Insurance} />
+        <Route path="/" component={CashBack} />
+      </Switch>
     </div>
   );
 }

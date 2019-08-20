@@ -12,17 +12,17 @@ function repayment(loanAmount, interestRate, loanTerm, frequency) {
 }
 //convert repayment to monthly repayment
 export function monthlyRepay(loanAmount, interestRate, loanTerm, frequency) {
-  return Math.round(
+  return (
     repayment(loanAmount, interestRate, loanTerm, frequency) *
-      monthlyConverter(frequency),
-    2
+    monthlyConverter(frequency)
   );
 }
 
 export function yearlyRepayment(loanAmount, interestRate, loanTerm, frequency) {
-  return (
+  return Math.round(
     repayment(loanAmount, interestRate, loanTerm, frequency) *
-    frequecyConverter(frequency)
+      frequecyConverter(frequency),
+    2
   );
 }
 //function to caculate total cost os loan

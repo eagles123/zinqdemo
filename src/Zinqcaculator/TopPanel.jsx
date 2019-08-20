@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Slider from "../Components/Slider";
-import { monthlyRepay } from "../Utils/fakeCaculatorService";
 import { TextField, Grid } from "@material-ui/core/";
 
 const TopPanel = props => {
@@ -18,26 +17,34 @@ const TopPanel = props => {
     "Yearly"
   ];
 
+  function validateNumber() {
+    let temp = parseInt(values.loanTime);
+    if (typeof temp === "number" && !isNaN(temp)) return true;
+    else return false;
+  }
+  //following function validate input within the defined range
+  function validateTermInput() {
+    let temp = parseInt(values.loanTime);
+    if (temp > 0 && temp <= 30) return true;
+    else return false;
+  }
+  function validateInterestInput() {
+    let temp = parseInt(values.interest);
+    if (temp > 0 && temp <= 99) return true;
+    else return false;
+  }
   //validate term of year between 1-30 years range
   function validateTerm() {
-    let temp = parseInt(values.loanTime);
-    if (typeof temp === "number" && !isNaN(temp)) {
-      if (temp <= 0 || temp > 30) {
-        setTermError("Term range must between 1-30 years");
-      } else {
-        setTermError("");
-      }
+    if (validateNumber()) {
+      if (validateTermInput() || values.loanTime === "") setTermError("");
+      else setTermError("Term range must between 1-30 years");
     }
   }
   //validate interest rate between 0-99 years range
   function validateInterest() {
-    let temp = parseInt(values.interest);
-    if (typeof temp === "number" && !isNaN(temp)) {
-      if (temp < 0 || temp > 99) {
-        setRateError("Interest rate must be in 0-99% range");
-      } else {
-        setRateError("");
-      }
+    if (validateNumber()) {
+      if (validateInterestInput() || values.interest === "") setRateError("");
+      else setRateError("Interest rate must be in 0-99% range");
     }
   }
 
@@ -46,8 +53,9 @@ const TopPanel = props => {
     validateTerm();
     validateInterest();
   }, [values.loanTime, values.interest]);
+
   return (
-    <>
+    <div className="top-panel">
       <h2>THE ZINQ-CACULATOR</h2>
       <p>
         {" "}
@@ -104,18 +112,38 @@ const TopPanel = props => {
               </option>
             ))}
           </TextField>
-          <p>{result}</p>
         </Grid>
       </Grid>
       <Grid container className="repayment">
         <Grid item xs={10} md={5} spacing={1}>
-          <p>Estimated monthly repayment: </p>
+          <p>
+            Estimated monthly repayment:{" "}
+            <span className="amount">
+              {" "}
+              {values.monthlyPayment > 0 &&
+              values.monthlyPayment < 99999999 &&
+              validateTermInput() &&
+              validateInterestInput()
+                ? `$ ${values.monthlyPayment.toLocaleString()}`
+                : ""}
+            </span>
+          </p>
         </Grid>
         <Grid item xs={10} md={5} spacing={1}>
-          <p>Total cost of loan (over {values.loanTime} years): </p>
+          <p>
+            Total cost of loan (over {values.loanTime} years):{" "}
+            <span className="amount">
+              {values.totalCostofLoan > 0 &&
+              values.totalCostofLoan < 99999999 &&
+              validateTermInput() &&
+              validateInterestInput()
+                ? `$ ${values.totalCostofLoan.toLocaleString()}`
+                : ""}
+            </span>
+          </p>
         </Grid>
       </Grid>
-    </>
+    </div>
   );
 };
 

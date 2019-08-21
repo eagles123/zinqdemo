@@ -27,7 +27,7 @@ export function yearlyRepayment(loanAmount, interestRate, loanTerm, frequency) {
 }
 //function to caculate total cost os loan
 export function totalLoan(loanAmount, interestRate, loanTerm, frequency) {
-  let newRate = interestRate / 100;
+  //original formula dose not seem right
   // return Math.round(
   //   (monthlyRepay(loanAmount, interestRate, loanTerm, frequency) /
   //     (newRate / frequecyConverter(frequency))) *
@@ -58,6 +58,7 @@ export function frequecyConverter(frequency) {
       return 2;
     case "Yearly":
       return 1;
+    default:
   }
 }
 
@@ -76,5 +77,6 @@ export function monthlyConverter(frequency) {
       return 1 / 6;
     case "Yearly":
       return 1 / 12;
+    default:
   }
 }

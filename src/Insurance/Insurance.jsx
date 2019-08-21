@@ -23,7 +23,6 @@ const Insurance = () => {
   const [gender, setGender] = useState("");
   const [smoke, setSmoke] = useState("");
   const [partner, setPartner] = useState("");
-  const [click, setClick] = useState(true);
   //check form error
   const [errors, setErrors] = useState({});
   const [radioErros, setRadioErrors] = useState({

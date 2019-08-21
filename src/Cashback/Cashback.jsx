@@ -50,7 +50,14 @@ const CashBack = () => {
               Loan amount:{" "}
               <span className="amount">${loan.toLocaleString()}</span>
             </p>
-            <Slider value={loan} onChange={setLoan} width={"70%"} />
+            <Slider
+              value={loan}
+              onChange={setLoan}
+              width={"70%"}
+              min={250000}
+              max={2500000}
+              step={1000}
+            />
             <p style={{ fontSize: "1.3rem" }}>
               Your Cash Back is:{" "}
               <span className="amount">${cashBack.toLocaleString()}</span>

@@ -3,36 +3,36 @@ import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
 const Loanslider = props => {
-  const { width } = props;
-  const { value, onChange, name } = props;
+  const { value, onChange, width, min, max, step } = props;
 
   const handleChange = value => {
     onChange(value);
   };
+
   return (
     <React.Fragment>
       <div className="slider">
         <Slider
+          tipProps={{ overlayClassName: "foo" }}
           style={{ width: width }}
-          dots
           dotStyle={{ borderColor: "lightgrey" }}
           activeDotStyle={{ borderColor: "#673ab7" }}
           value={value}
           //bussiness rule min $250000
-          min={250000}
-          //bussiness rule min $2500000
-          max={2500000}
+          min={min}
+          //bussiness rule max $2500000
+          max={max}
           //assume step is $1000
-          step={1000}
+          step={step}
           onChange={handleChange}
-          trackStyle={{ backgroundColor: "black", height: 5 }}
+          trackStyle={{ backgroundColor: "#673ab7", height: 5 }}
           handleStyle={{
             borderColor: "#f3e5f5",
             height: 16,
             width: 16,
             backgroundColor: "#673ab7"
           }}
-          railStyle={{ backgroundColor: "white", height: 20 }}
+          railStyle={{ backgroundColor: "lightgrey", height: 5 }}
         />
       </div>
     </React.Fragment>

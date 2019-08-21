@@ -47,12 +47,19 @@ const ProgressChart = props => {
   useEffect(() => {
     setOptions({
       ...options,
-      xaxis: { categories: years },
+      xaxis: {
+        categories: years
+      },
       tooltip: {
         y: {
           name: "",
+          //formater function to display the tooltip
           formatter: function(value) {
-            return `${Math.round(100 - (value / loan) * 100)} % paid off!`;
+            return `${Math.round(
+              100 - (value / loan) * 100
+            )}% paid off, ${Math.round(
+              (value / loan) * 100
+            )}% to go. Great Work. Estimated Monthly payment: $ ${monthlyPayment.toLocaleString()}`;
           }
         }
       }

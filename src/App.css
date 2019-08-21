@@ -8,7 +8,7 @@ body {
 }
 
 .container {
-  margin-top: 4rem;
+  margin-top: 1rem;
 }
 .cash-slider {
   margin-top: 5rem;
@@ -16,6 +16,9 @@ body {
 
 .cash-slider > p {
   margin-top: 2rem;
+}
+.insur-slider {
+  margin-top: 1.3rem;
 }
 .cashback {
   margin-left: 5rem;
@@ -46,6 +49,21 @@ body {
   overflow-y: hidden;
 }
 
+.radioCheck {
+  font-size: 0.7rem;
+  color: red;
+}
+.result {
+  display: block;
+  margin-left: 10%;
+  margin-top: 8rem;
+}
+.result > h3 {
+  margin-top: 3rem;
+}
+.result > h3 > span {
+  color: #e91e63;
+}
 @media (max-width: 703px) {
   .container {
     margin-top: 0.5rem;

@@ -43,13 +43,6 @@ export function totalLoan(loanAmount, interestRate, loanTerm, frequency) {
   );
 }
 
-// export function closingBalance(loanAmount, interestRate, loanTerm, repayment) {
-//   let closingBalance = [];
-//   for (let i = 0; i <= loanTerm; i++) {
-//     closingBalance.push(getBalance(loanAmount, interestRatem, repayment));
-//   }
-// }
-
 //convert the payment frequency factor
 export function frequecyConverter(frequency) {
   switch (frequency) {

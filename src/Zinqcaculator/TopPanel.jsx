@@ -73,7 +73,15 @@ const TopPanel = props => {
         Take our Zinq calculator for a spin... and see if the numbers add up for
         you:
       </p>
-      <Slider value={loan} onChange={handleLoan} name={"loan"} width={"70%"} />
+      <Slider
+        value={loan}
+        onChange={handleLoan}
+        name={"loan"}
+        width={"70%"}
+        min={250000}
+        max={2500000}
+        step={1000}
+      />
       <p>
         Loan amount: <span>${loan.toLocaleString()}</span>
       </p>

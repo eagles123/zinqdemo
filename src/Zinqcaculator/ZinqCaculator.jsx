@@ -19,21 +19,6 @@ const ZinqCaculator = () => {
   const [years, setYears] = useState([]);
   const [closingBalance, setBalance] = useState([]);
 
-  // const [values, setValues] = useState({
-  //   loanTime: "",
-  //   interest: "",
-  //   frequency: "Weekly",
-  //   repayment: 0,
-  //   monthlyPayment: "",
-  //   totalCostofLoan: "",
-  //   years: [],
-  //   closingBalance: []
-  // });
-
-  // const handleChange = name => event => {
-  //   setValues({ ...values, [name]: event.target.value });
-  // };
-
   //set year vector
   async function handleYearChange() {
     let temp = [];
@@ -49,32 +34,6 @@ const ZinqCaculator = () => {
     setRepayment(yearlyRepayment(loan, interest, loanTime, frequency));
   }
 
-  // function handlePaymentChange() {
-  //   setValues({
-  //     ...values,
-  //     ["monthlyPayment"]: monthlyRepay(
-  //       loan,
-  //       values.interest,
-  //       values.loanTime,
-  //       values.frequency
-  //     ),
-  //     ["totalCostofLoan"]: totalLoan(
-  //       loan,
-  //       values.interest,
-  //       values.loanTime,
-  //       values.frequency
-  //     ),
-  //     ["repayment"]: yearlyRepayment(
-  //       loan,
-  //       values.interest,
-  //       values.loanTime,
-  //       values.frequency
-  //     )
-  //   });
-  // }
-
-  //console.log(getClosingBalance(loan, interest, repayment, loanTime));
-
   function getClosingBalance(loanAmount, interestRate, repayment, loanTerm) {
     let closingBalance = [];
     let amount = loanAmount;
@@ -88,11 +47,6 @@ const ZinqCaculator = () => {
     return closingBalance;
   }
 
-  // function paymentPercent(loanAmount, closingBalance){
-  //   let paymentPercent =
-  // }
-
-  // balance(loan, values.interest / 100, values.repayment);
   //lifecycle hook to caculate monthly repayment and totoal cost of loan
   useEffect(() => {
     handlePaymentChange();
@@ -106,18 +60,6 @@ const ZinqCaculator = () => {
   useEffect(() => {
     setBalance(getClosingBalance(loan, interest, repayment, loanTime));
   }, [loan, loanTime, interest, repayment]);
-
-  // useEffect(() => {
-  //   setValues({
-  //     ...values,
-  //     ["closingBalance"]: getClosingBalance(
-  //       loan,
-  //       values.interest,
-  //       values.repayment,
-  //       values.loanTime
-  //     )
-  //   });
-  // }, [loan, values.loanTime, values.interest, values.frequency]);
 
   return (
     <Container className="container caculator">

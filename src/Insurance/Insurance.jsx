@@ -155,7 +155,6 @@ const Insurance = () => {
       contact.value &&
       email.value
     ) {
-      console.log("input true");
       return true;
     } else return false;
   }
@@ -207,13 +206,6 @@ const Insurance = () => {
             <p>Your date of birth* </p>
           </Grid>
           <Grid item xs={10} md={8} spacing={1}>
-            {/* <input
-            style={{ height: "2rem" }}
-            required
-            {...bod}
-            placeholder="DOB"
-            type="date"
-          /> */}
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
                 inputVariant="outlined"

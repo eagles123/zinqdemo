@@ -8,6 +8,7 @@ import {
 import { TextField, Grid, Container, Radio, Fab } from "@material-ui/core/";
 import Slider from "../Components/Slider";
 import { caculateQuote } from "./../Utils/fakeInsuranceService";
+import { useFormInput } from "./../Utils/useFormInput";
 
 const Insurance = () => {
   const income = useFormInput("");
@@ -176,18 +177,6 @@ const Insurance = () => {
     else return 0;
   }
 
-  //customer hook to get input
-  function useFormInput(initialValue) {
-    const [value, setValue] = useState(initialValue);
-    function handleChange(e) {
-      if (!isNaN(parseInt(e.target.value))) setValue(parseInt(e.target.value));
-      else setValue(e.target.value);
-    }
-    return {
-      value,
-      onChange: handleChange
-    };
-  }
   return (
     <Container className="container caculator">
       <h2>ZINQ-ULATE</h2>

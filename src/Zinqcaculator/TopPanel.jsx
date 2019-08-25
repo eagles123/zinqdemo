@@ -76,7 +76,6 @@ const TopPanel = props => {
       <Slider
         value={loan}
         onChange={handleLoan}
-        name={"loan"}
         width={"70%"}
         min={250000}
         max={2500000}

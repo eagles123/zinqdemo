@@ -20,6 +20,9 @@ body {
 .insur-slider {
   margin-top: 1.3rem;
 }
+.capacity-slider {
+  margin-top: 1.3rem;
+}
 .cashback {
   margin-left: 5rem;
   text-align: left;
@@ -63,6 +66,18 @@ body {
 }
 .result > h3 > span {
   color: #e91e63;
+}
+
+.partner-field {
+  animation: apper 1.5s;
+}
+@keyframes apper {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 @media (max-width: 703px) {
   .container {

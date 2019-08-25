@@ -11,6 +11,10 @@ const CashBack = () => {
   //trailing
   const [trail, setTraillling] = useState(trailing(loan));
 
+  function handleSliderChange(name, value) {
+    setLoan(value);
+  }
+
   //effect to triger when loan amount is changed
   useEffect(() => {
     setCashBack(upFront(loan));
@@ -52,7 +56,7 @@ const CashBack = () => {
             </p>
             <Slider
               value={loan}
-              onChange={setLoan}
+              onChange={handleSliderChange}
               width={"70%"}
               min={250000}
               max={2500000}

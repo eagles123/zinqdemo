@@ -16,8 +16,8 @@ const Navbar = () => {
                   component={NavLink}
                   to="/caculator"
                 />
-                <Tab label="Insurance" component={NavLink} to="/insurance" />
                 <Tab label="Loan Capacity" component={NavLink} to="/capacity" />
+                <Tab label="Insurance" component={NavLink} to="/insurance" />
               </Tabs>
             </Grid>
           </Toolbar>

@@ -28,6 +28,10 @@ const ZinqCaculator = () => {
     return temp;
   }
 
+  function handleSliderChange(name, value) {
+    setLoan(value);
+  }
+
   function handlePaymentChange() {
     setMonthlyPayment(monthlyRepay(loan, interest, loanTime, frequency));
     setCostofLoan(totalLoan(loan, interest, loanTime, frequency));
@@ -65,7 +69,7 @@ const ZinqCaculator = () => {
     <Container className="container caculator">
       <TopPanel
         loan={loan}
-        handleLoan={setLoan}
+        handleLoan={handleSliderChange}
         loanTime={loanTime}
         handleLoanTime={setLoanTime}
         interest={interest}

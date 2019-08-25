@@ -9,6 +9,8 @@ import { TextField, Grid, Container, Radio, Fab } from "@material-ui/core/";
 import Slider from "../Components/Slider";
 import { caculateQuote } from "./../Utils/fakeInsuranceService";
 import { useFormInput } from "./../Utils/useFormInput";
+import { checkInput } from "./../Utils/checkInput";
+import CountUp from "react-countup";
 
 const Insurance = () => {
   const income = useFormInput("");
@@ -47,10 +49,8 @@ const Insurance = () => {
     );
   }
 
-  //validate input
-  function validateRequire(input) {
-    if (input === "") return true;
-    else return false;
+  function handleSliderChange(name, value) {
+    setYoungest(value);
   }
 
   //validate dependent number from 0-9
@@ -84,48 +84,30 @@ const Insurance = () => {
       partnerError
     });
   }
-  //function to check if required field is filled
-  async function checkRequired() {
-    let incomeError;
-    let dependentError;
-    let youngestDepnError;
-    let assestsError;
-    let liabilitiesError;
-    let firstNameError;
-    let surnameError;
-    let contactError;
-    let emailError;
-    validateRequire(income.value)
-      ? (incomeError = "Income is required")
-      : (incomeError = "");
 
-    if (validateRequire(dependent.value) === false) {
+  //function to check if required field is filled
+  function checkRequired() {
+    let youngestDepnError;
+    let incomeError = checkInput(income.value, "Income is required");
+    let dependentError = checkInput(dependent.value, "Dependent is required");
+    if (dependentError == false) {
       validateDependent(dependent.value)
         ? (dependentError = "")
         : (dependentError = "Dependent range is 0-9");
-    } else dependentError = "Dependent is required";
+    }
     validateYoungestDepn(youngestDepn, dependent.value)
       ? (youngestDepnError = "")
       : (youngestDepnError = "Please check the age");
-    validateRequire(assests.value)
-      ? (assestsError = "Assests is required")
-      : (assestsError = "");
-    validateRequire(liabilities.value)
-      ? (liabilitiesError = "Liabilities is required")
-      : (liabilitiesError = "");
-    validateRequire(firstName.value)
-      ? (firstNameError = "First name is required")
-      : (firstNameError = "");
-    validateRequire(surname.value)
-      ? (surnameError = "Surname is required")
-      : (surnameError = "");
-    validateRequire(contact.value)
-      ? (contactError = "Contact detail is required")
-      : (contactError = "");
-    validateRequire(email.value)
-      ? (emailError = "Email is required")
-      : (emailError = "");
-    await setErrors({
+    let assestsError = checkInput(assests.value, "Assets is required");
+    let liabilitiesError = checkInput(
+      liabilities.value,
+      "Liabilities is required"
+    );
+    let firstNameError = checkInput(firstName.value, "First name is required");
+    let surnameError = checkInput(surname.value, "Surname is reuired");
+    let contactError = checkInput(contact.value, "Contact is Required");
+    let emailError = checkInput(email.value, "Email is required");
+    setErrors({
       income: incomeError,
       dependent: dependentError,
       youngestDepn: youngestDepnError,
@@ -137,19 +119,24 @@ const Insurance = () => {
       email: emailError
     });
   }
+
   //check if there are any errors before submit
   function validateInput() {
     if (
       smoke &&
       partner &&
       gender &&
+      income.value !== "" &&
       income.value >= 0 &&
       dependent.value >= 0 &&
       dependent.value <= 9 &&
+      dependent.value !== "" &&
       youngestDepn >= 0 &&
       youngestDepn <= 25 &&
       assests.value >= 0 &&
+      assests.value !== "" &&
       liabilities.value >= 0 &&
+      liabilities.value !== 0 &&
       validateYoungestDepn(youngestDepn, dependent.value) &&
       firstName.value &&
       surname.value &&
@@ -167,13 +154,14 @@ const Insurance = () => {
   }
   function onSubmit() {
     validateForm();
+    console.log(validateInput());
     if (validateInput() === true) setResult(getQuote());
   }
 
   //convert date of birth to age
   function getAge(dateofbirth) {
     let diff = new Date() - dateofbirth;
-    if (!isNaN(diff)) return Math.floor(diff / 31557600000);
+    if (!isNaN(diff)) return diff / 31557600000;
     else return 0;
   }
 
@@ -326,7 +314,7 @@ const Insurance = () => {
               {...dependent}
               style={{ margin: 4 }}
               placeholder="Number of dependent"
-              margin="dense"
+              margin="c"
               variant="outlined"
             />
           </Grid>
@@ -337,7 +325,7 @@ const Insurance = () => {
             <div className="insur-slider">
               <Slider
                 value={youngestDepn}
-                onChange={setYoungest}
+                onChange={handleSliderChange}
                 width={"80%"}
                 min={0}
                 max={25}
@@ -444,22 +432,54 @@ const Insurance = () => {
             <div className="result">
               <h3>
                 Your life cover is:{" "}
-                <span>${result.life_cover.toLocaleString()}</span>
+                <CountUp
+                  start={0}
+                  end={result.life_cover}
+                  duration={1}
+                  separator=","
+                  decimals={0}
+                  prefix="$ "
+                />
+                {/* <span>${result.life_cover.toLocaleString()}</span> */}
               </h3>
 
               <h3>
                 Your TPD cover is:{" "}
-                <span>${result.tpd_cover.toLocaleString()}</span>
+                <CountUp
+                  start={0}
+                  end={result.tpd_cover}
+                  duration={1}
+                  separator=","
+                  decimals={0}
+                  prefix="$ "
+                />
+                {/* <span>${result.tpd_cover.toLocaleString()}</span> */}
               </h3>
 
               <h3>
                 Your Trauma cover is:{" "}
-                <span>${result.trauma_cover.toLocaleString()}</span>
+                <CountUp
+                  start={0}
+                  end={result.trauma_cover}
+                  duration={1}
+                  separator=","
+                  decimals={0}
+                  prefix="$ "
+                />
+                {/* <span>${result.trauma_cover.toLocaleString()}</span> */}
               </h3>
 
               <h3>
                 Your IP cover is:{" "}
-                <span>${result.ip_cover.toLocaleString()}</span>
+                <CountUp
+                  start={0}
+                  end={result.ip_cover}
+                  duration={1}
+                  separator=","
+                  decimals={0}
+                  prefix="$ "
+                />
+                {/* <span>${result.ip_cover.toLocaleString()}</span> */}
               </h3>
             </div>
           ) : null}

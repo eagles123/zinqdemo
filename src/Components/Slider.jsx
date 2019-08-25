@@ -3,11 +3,7 @@ import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
 const Loanslider = props => {
-  const { value, onChange, width, min, max, step } = props;
-
-  const handleChange = value => {
-    onChange(value);
-  };
+  const { value, onChange, width, min, max, step, label } = props;
 
   return (
     <React.Fragment>
@@ -24,7 +20,7 @@ const Loanslider = props => {
           max={max}
           //assume step is $1000
           step={step}
-          onChange={handleChange}
+          onChange={value => onChange(label, value)}
           trackStyle={{ backgroundColor: "#673ab7", height: 5 }}
           handleStyle={{
             borderColor: "#f3e5f5",
